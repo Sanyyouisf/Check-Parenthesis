@@ -23,11 +23,9 @@
                             //---check for )
                             else if (input[i]==')')
                             {
-                                //console.log(pArray);
                                 if (pArray.includes('(') )
                                 {
                                     var j = pArray.indexOf('(');
-                                    //console.log("j :"+ j);
                                     pArray.splice(j,1);
                                     console.log("removed: "+ input[i]);
                                     balance--;
@@ -42,11 +40,9 @@
                             //----check for ]
                             else if (input[i]==']')
                             {
-                                //console.log(pArray);
                                 if (pArray.includes('[') )
                                 {
                                     var j = pArray.indexOf('[');
-                                    //console.log("j :"+ j);
                                     pArray.splice(j,1);
                                     console.log("removed: "+ input[i]);
                                     balance--;
@@ -61,11 +57,9 @@
                             //----check for }
                             else if (input[i]=='}')
                             {
-                                //console.log(pArray);
                                 if (pArray.includes('{') )
                                 {
                                     var j = pArray.indexOf('{');
-                                    //console.log("j :"+ j);
                                     pArray.splice(j,1);
                                     console.log("removed: "+ input[i]);
                                     balance--;
@@ -124,7 +118,7 @@
             <td><button ng-click="isBalanced = isBalanced(input)">Check balance</button></td>
             <td><p id="balancedResult"></p></td>
         </tr>
-         
+
         <tr><td><div>The deepest level is: {{deepestLevel}}</div></td><td><button ng-click="deepestLevel = deepestLevel(input)">Get depth</button></td></tr>
         <tr><td><div>The answer is: {{answer}}</div></td><td> <button ng-click="answer = getAnswer(input)">Display levels</button></td></tr>
         </tbody>
