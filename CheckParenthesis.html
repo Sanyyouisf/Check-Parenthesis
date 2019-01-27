@@ -9,6 +9,7 @@
                         var balance = 0;
                         var pArray = [];
                         var Unbalanced = false ;
+                        var result = "";
 						console.log(input);
                         console.log("the length: "+input.length);
                         for(i=0; i< input.length; i++)
@@ -84,11 +85,15 @@
                         if(balance == 0 && Unbalanced == false)
                         {
                             console.log("Balanced Parenthesis.") ;
+                            result = "Balanced Parenthesis";
                         }
                         else 
                         {
                             console.log("Unbalanced Parenthesis.") ;
+                            result = "Unbalanced Parenthesis.";
                         }
+                        document.getElementById("balancedResult").innerHTML =result;
+
                     };
 
                     $scope.getDeepestLevel = function (input) {
@@ -114,7 +119,12 @@
     <input placeholder="Input an equation" ng-model="input">
     <table>
         <tbody>
-        <tr><td><div>The parenthesis are balanced: {{isBalanced}}</div></td><td><button ng-click="isBalanced = isBalanced(input)">Check balance</button></td></tr>
+
+        <tr><td><div>The parenthesis are balanced: {{isBalanced}}</div></td>
+            <td><button ng-click="isBalanced = isBalanced(input)">Check balance</button></td>
+            <td><p id="balancedResult"></p></td>
+        </tr>
+         
         <tr><td><div>The deepest level is: {{deepestLevel}}</div></td><td><button ng-click="deepestLevel = deepestLevel(input)">Get depth</button></td></tr>
         <tr><td><div>The answer is: {{answer}}</div></td><td> <button ng-click="answer = getAnswer(input)">Display levels</button></td></tr>
         </tbody>
