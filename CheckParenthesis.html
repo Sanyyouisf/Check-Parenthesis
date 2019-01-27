@@ -3,12 +3,12 @@
     <script type="application/javascript">
         (function() {
             angular.module('myApp', [])
-
                 .controller('myController', ['$scope', function ($scope) {
                     $scope.isBalanced = function (input) {
                         //TODO: check if the parenthesis in the input is balanced
                         var balance = 0;
                         var pArray = [];
+                        var Unbalanced = false ;
 						console.log(input);
                         console.log("the length: "+input.length);
                         for(i=0; i< input.length; i++)
@@ -34,6 +34,7 @@
                                 else
                                 {
                                     console.log("there is no p:" + input[i]);
+                                    Unbalanced = true;
                                     break;
                                 }
                             } 
@@ -52,6 +53,7 @@
                                 else
                                 {
                                     console.log("there is no p:" + input[i]);
+                                    Unbalanced = true;
                                     break;
                                 }
                             } 
@@ -70,14 +72,16 @@
                                 else
                                 {
                                     console.log("there is no p:" + input[i]);
+                                    Unbalanced = true;
                                     break;
                                 }
                             }          
                         }
                         //console.log("outside the loop");
                         console.log("B last: "+ balance);
+                        console.log("Unbalanced: " + Unbalanced);
                         console.log(pArray);
-                        if(balance == 0)
+                        if(balance == 0 && Unbalanced == false)
                         {
                             console.log("Balanced Parenthesis.") ;
                         }
@@ -108,7 +112,6 @@
     <div>Implement the functions for each of the 3 buttons and display the metrics on the screen each time the corresponding button is clicked, fix any bugs along the way</div>
     <br/>
     <input placeholder="Input an equation" ng-model="input">
-	<h3>Hi </h3>
     <table>
         <tbody>
         <tr><td><div>The parenthesis are balanced: {{isBalanced}}</div></td><td><button ng-click="isBalanced = isBalanced(input)">Check balance</button></td></tr>
