@@ -1,4 +1,4 @@
-##Check-Parenthesis
+## Check-Parenthesis
 
 - Implement the functions for each of the 3 buttons and display the metrics on the screen each time the corresponding button is clicked, fix any bugs along the way
 
