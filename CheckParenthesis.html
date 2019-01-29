@@ -10,14 +10,14 @@
                         var pArray = [];
                         var Unbalanced = false ;
                         var result = "";
-						console.log(input);
-                        console.log("the length: "+input.length);
+						// console.log(input);
+                        // console.log("the length: "+input.length);
                         for(i=0; i< input.length; i++)
                         {
                             if(input[i]=='('|| input[i]=='[' || input[i]=='{') 
                             {                  
                                 pArray.push(input[i]);
-                                console.log("added: "+ input[i]);
+                                // console.log("added: "+ input[i]);
                                  balance++;
                             }
                             //---check for )
@@ -27,12 +27,12 @@
                                 {
                                     var j = pArray.indexOf('(');
                                     pArray.splice(j,1);
-                                    console.log("removed: "+ input[i]);
+                                    // console.log("removed: "+ input[i]);
                                     balance--;
                                 } 
                                 else
                                 {
-                                    console.log("there is no p:" + input[i]);
+                                    // console.log("there is no p:" + input[i]);
                                     Unbalanced = true;
                                     break;
                                 }
@@ -44,12 +44,12 @@
                                 {
                                     var j = pArray.indexOf('[');
                                     pArray.splice(j,1);
-                                    console.log("removed: "+ input[i]);
+                                    // console.log("removed: "+ input[i]);
                                     balance--;
                                 } 
                                 else
                                 {
-                                    console.log("there is no p:" + input[i]);
+                                    // console.log("there is no p:" + input[i]);
                                     Unbalanced = true;
                                     break;
                                 }
@@ -61,33 +61,31 @@
                                 {
                                     var j = pArray.indexOf('{');
                                     pArray.splice(j,1);
-                                    console.log("removed: "+ input[i]);
+                                    // console.log("removed: "+ input[i]);
                                     balance--;
                                 } 
                                 else
                                 {
-                                    console.log("there is no p:" + input[i]);
+                                    // console.log("there is no p:" + input[i]);
                                     Unbalanced = true;
                                     break;
                                 }
                             }          
                         }
-                        //console.log("outside the loop");
-                        console.log("B last: "+ balance);
-                        console.log("Unbalanced: " + Unbalanced);
-                        console.log(pArray);
+                        // console.log("B last: "+ balance);
+                        // console.log("Unbalanced: " + Unbalanced);
+                        // console.log(pArray);
                         if(balance == 0 && Unbalanced == false)
                         {
-                            console.log("Balanced Parenthesis.") ;
+                            // console.log("Balanced Parenthesis.") ;
                             result = "Balanced Parenthesis";
                         }
                         else 
                         {
-                            console.log("Unbalanced Parenthesis.") ;
+                            // console.log("Unbalanced Parenthesis.") ;
                             result = "Unbalanced Parenthesis.";
                         }
                         document.getElementById("balancedResult").innerHTML =result;
-
                     };
 
                     $scope.getDeepestLevel = function (input) {
