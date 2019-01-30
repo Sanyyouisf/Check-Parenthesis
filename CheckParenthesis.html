@@ -101,6 +101,9 @@
                         var currentLevel = 0
                         var maxLevel = 0;
                         var pArray = [];
+                        var calcArray = [];
+                        var openPar = false;
+                        var alreadyOpened = false;
                         var Unbalanced = false ;
                         var result = "";
                         console.log(input);
@@ -108,14 +111,21 @@
                         for(i=0; i< input.length; i++)
                         {
                             if(input[i]=='('|| input[i]=='[' || input[i]=='{') 
-                            {                  
+                            {    
+                              if(alreadyOpened == true)
+                                {
+                                  calcArray.length = 0 ;
+                                }
+                               else 
+                               {
+                                openPar = true;
+                               }                                
                                 pArray.push(input[i]);
                                 currentLevel ++
                                 if(currentLevel > maxLevel)
                                   {
                                     maxLevel = currentLevel;
                                   }
-                                    //console.log("added: "+ input[i]);
                                  balance++;
                             }
                             //---check for )
@@ -123,9 +133,9 @@
                             {
                                 if (pArray.includes('(') )
                                 {
+                                    openPar = false;
                                     var j = pArray.indexOf('(');
                                     pArray.splice(j,1);
-                                    console.log("removed: "+ input[i]);
                                     balance--;
                                     if( currentLevel > 0 )
                                       {
@@ -139,7 +149,6 @@
                                 } 
                                 else
                                 {
-                                    console.log("there is no p:" + input[i]);
                                     Unbalanced = true;
                                     break;
                                 }
@@ -149,25 +158,24 @@
                             {
                                 if (pArray.includes('[') )
                                 {
+                                    openPar = false;
                                     var j = pArray.indexOf('[');
                                     pArray.splice(j,1);
-                                    console.log("removed: "+ input[i]);
                                     balance--;
                                     if( currentLevel > 0 )
-                                      {
-                                        currentLevel-- ;
-                                      }
-                                      else 
-                                      {
-                                         Unbalanced = true;
-                                         break;
-                                      }
+                                    {
+                                      currentLevel-- ;
+                                    }
+                                    else 
+                                    {
+                                       Unbalanced = true;
+                                       break;
+                                    }
                                 } 
                                 else
                                 {
-                                    console.log("there is no p:" + input[i]);
-                                    Unbalanced = true;
-                                    break;
+                                   Unbalanced = true;
+                                   break;
                                 }
                             } 
                             //----check for }
@@ -175,36 +183,42 @@
                             {
                                 if (pArray.includes('{') )
                                 {
+                                    openPar = false;
                                     var j = pArray.indexOf('{');
                                     pArray.splice(j,1);
-                                    console.log("removed: "+ input[i]);
                                     balance--;
                                     if( currentLevel > 0 )
-                                      {
-                                        currentLevel-- ;
-                                      }
-                                      else 
-                                      {
-                                         Unbalanced = true;
-                                         break;
-                                      }
+                                    {
+                                      currentLevel-- ;
+                                    }
+                                    else 
+                                    {
+                                       Unbalanced = true;
+                                       break;
+                                    }
                                 } 
                                 else
                                 {
-                                    console.log("there is no p:" + input[i]);
-                                    Unbalanced = true;
-                                    break;
+                                  Unbalanced = true;
+                                  break;
                                 }
+                            }
+                            else 
+                            {
+                              if(openPar=true)
+                                {
+                                  alreadyOpened = true
+                                  calcArray.push(input[i])
+                                  console.log(calcArray)
+                                }                               
+                                
                             }          
                         }
-                        //console.log("outside the loop");
-                        console.log("B last: "+ balance);
-                        console.log("Unbalanced: " + Unbalanced);
                         console.log(pArray);
                         if(balance == 0 && Unbalanced == false)
                         {
                             console.log("Balanced Parenthesis.") ;
-                            result = maxLevel + " layers deep";
+                            result = calcArray.join("") +" - " + maxLevel + " layers deep";
                         }
                         else 
                         {
