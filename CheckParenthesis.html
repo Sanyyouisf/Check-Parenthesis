@@ -1,23 +1,42 @@
+Skip to content
+ 
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ @Sanyyouisf Sign out
+0
+0 0 Sanyyouisf/Check-Parenthesis
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights  Settings
+Check-Parenthesis/CheckParenthesis.html
+1a873ef  a day ago
+ Sany Yousif update
+     
+271 lines (258 sloc)  12.4 KB
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script type="application/javascript">
         (function() {
             angular.module('myApp', [])
                 .controller('myController', ['$scope', function ($scope) {
+                
+ //--------------------------------------------------------------------------------
                     $scope.isBalanced = function (input) {
                         //TODO: check if the parenthesis in the input is balanced
                         var balance = 0;
                         var pArray = [];
                         var Unbalanced = false ;
                         var result = "";
-						// console.log(input);
-                        // console.log("the length: "+input.length);
+                        console.log(input);
+                        console.log("the length: "+input.length);
                         for(i=0; i< input.length; i++)
                         {
                             if(input[i]=='('|| input[i]=='[' || input[i]=='{') 
                             {                  
                                 pArray.push(input[i]);
-                                // console.log("added: "+ input[i]);
+                                console.log("added: "+ input[i]);
                                  balance++;
                             }
                             //---check for )
@@ -27,12 +46,12 @@
                                 {
                                     var j = pArray.indexOf('(');
                                     pArray.splice(j,1);
-                                    // console.log("removed: "+ input[i]);
+                                    console.log("removed: "+ input[i]);
                                     balance--;
                                 } 
                                 else
                                 {
-                                    // console.log("there is no p:" + input[i]);
+                                    console.log("there is no p:" + input[i]);
                                     Unbalanced = true;
                                     break;
                                 }
@@ -44,12 +63,12 @@
                                 {
                                     var j = pArray.indexOf('[');
                                     pArray.splice(j,1);
-                                    // console.log("removed: "+ input[i]);
+                                    console.log("removed: "+ input[i]);
                                     balance--;
                                 } 
                                 else
                                 {
-                                    // console.log("there is no p:" + input[i]);
+                                    console.log("there is no p:" + input[i]);
                                     Unbalanced = true;
                                     break;
                                 }
@@ -61,45 +80,175 @@
                                 {
                                     var j = pArray.indexOf('{');
                                     pArray.splice(j,1);
-                                    // console.log("removed: "+ input[i]);
+                                    console.log("removed: "+ input[i]);
                                     balance--;
                                 } 
                                 else
                                 {
-                                    // console.log("there is no p:" + input[i]);
+                                    console.log("there is no p:" + input[i]);
                                     Unbalanced = true;
                                     break;
                                 }
                             }          
                         }
-                        // console.log("B last: "+ balance);
-                        // console.log("Unbalanced: " + Unbalanced);
-                        // console.log(pArray);
+                        //console.log("outside the loop");
+                        console.log("B last: "+ balance);
+                        console.log("Unbalanced: " + Unbalanced);
+                        console.log(pArray);
                         if(balance == 0 && Unbalanced == false)
                         {
-                            // console.log("Balanced Parenthesis.") ;
+                            console.log("Balanced Parenthesis.") ;
                             result = "Balanced Parenthesis";
                         }
                         else 
                         {
-                            // console.log("Unbalanced Parenthesis.") ;
+                            console.log("Unbalanced Parenthesis.") ;
                             result = "Unbalanced Parenthesis.";
                         }
                         document.getElementById("balancedResult").innerHTML =result;
                     };
-
+//-------------------------------------------------------------------------------------------
                     $scope.getDeepestLevel = function (input) {
                         //TODO: get the contents within the deepest level of parenthesis and display the level of nesting
                         // {[(4 + 4) * 2] * (3 + 8)} + 7 should return 4 + 4 and display that it is 3 layers deep
                         // if there is a tie return the contents of the first leftmost one
+                        
+                        var balance = 0;
+                        var currentLevel = 0
+                        var maxLevel = 0;
+                        var pArray = [];
+                        var calcArray = [];
+                        var openPar = false;
+                        var alreadyOpened = false;
+                        var Unbalanced = false ;
+                        var result = "";
+                        console.log(input);
+                        console.log("the length: "+input.length);
+                        for(i=0; i< input.length; i++)
+                        {
+                            if(input[i]=='('|| input[i]=='[' || input[i]=='{') 
+                            {    
+                              if(alreadyOpened == true)
+                                {
+                                  calcArray.length = 0 ;
+                                }
+                               else 
+                               {
+                                openPar = true;
+                               }                                
+                                pArray.push(input[i]);
+                                currentLevel ++
+                                if(currentLevel > maxLevel)
+                                  {
+                                    maxLevel = currentLevel;
+                                  }
+                                 balance++;
+                            }
+                            //---check for )
+                            else if (input[i]==')')
+                            {
+                                if (pArray.includes('(') )
+                                {
+                                    openPar = false;
+                                    var j = pArray.indexOf('(');
+                                    pArray.splice(j,1);
+                                    balance--;
+                                    if( currentLevel > 0 )
+                                      {
+                                        currentLevel-- ;
+                                      }
+                                      else 
+                                      {
+                                         Unbalanced = true;
+                                         break;
+                                      }
+                                } 
+                                else
+                                {
+                                    Unbalanced = true;
+                                    break;
+                                }
+                            } 
+                            //----check for ]
+                            else if (input[i]==']')
+                            {
+                                if (pArray.includes('[') )
+                                {
+                                    openPar = false;
+                                    var j = pArray.indexOf('[');
+                                    pArray.splice(j,1);
+                                    balance--;
+                                    if( currentLevel > 0 )
+                                    {
+                                      currentLevel-- ;
+                                    }
+                                    else 
+                                    {
+                                       Unbalanced = true;
+                                       break;
+                                    }
+                                } 
+                                else
+                                {
+                                   Unbalanced = true;
+                                   break;
+                                }
+                            } 
+                            //----check for }
+                            else if (input[i]=='}')
+                            {
+                                if (pArray.includes('{') )
+                                {
+                                    openPar = false;
+                                    var j = pArray.indexOf('{');
+                                    pArray.splice(j,1);
+                                    balance--;
+                                    if( currentLevel > 0 )
+                                    {
+                                      currentLevel-- ;
+                                    }
+                                    else 
+                                    {
+                                       Unbalanced = true;
+                                       break;
+                                    }
+                                } 
+                                else
+                                {
+                                  Unbalanced = true;
+                                  break;
+                                }
+                            }
+                            else 
+                            {
+                              if(openPar=true)
+                                {
+                                  alreadyOpened = true
+                                  calcArray.push(input[i])
+                                  console.log(calcArray)
+                                }                               
+                                
+                            }          
+                        }
+                        console.log(pArray);
+                        if(balance == 0 && Unbalanced == false)
+                        {
+                            console.log("Balanced Parenthesis.") ;
+                            result = calcArray.join("") +" - " + maxLevel + " layers deep";
+                        }
+                        else 
+                        {
+                            console.log("Unbalanced Parenthesis.") ;
+                            result = "Unbalanced Parenthesis.";
+                        }
+                        
+                        document.getElementById("deepestLevel").innerHTML =result;
                     };
-
+//--------------------------------------------------------------------------------------------
                     $scope.getAnswer = function (input) {
                         //TODO: display the result of evaluating the input as a math expression
                         //hint: you can use eval()
                     };
-
-
                 }]);
         })();
     </script>
@@ -117,7 +266,11 @@
             <td><p id="balancedResult"></p></td>
         </tr>
 
-        <tr><td><div>The deepest level is: {{deepestLevel}}</div></td><td><button ng-click="deepestLevel = deepestLevel(input)">Get depth</button></td></tr>
+        <tr><td><div>The deepest level is: {{getDeepestLevel}}</div></td>
+            <td><button ng-click="getDeepestLevel = getDeepestLevel(input)">Get depth</button></td>
+            <td><p id="deepestLevel"></p></td>
+        </tr>
+        
         <tr><td><div>The answer is: {{answer}}</div></td><td> <button ng-click="answer = getAnswer(input)">Display levels</button></td></tr>
         </tbody>
     </table>
@@ -127,4 +280,3 @@
     <div>Extra credit: The getAnswer function should only work for basic math equations</div>
 </div>
 </body>
-
