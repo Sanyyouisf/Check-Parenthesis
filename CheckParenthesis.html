@@ -105,27 +105,30 @@
                         var alreadyOpened = false;
                         var Unbalanced = false ;
                         var result = "";
-                        console.log(input);
-                        console.log("the length: "+input.length);
+                        //console.log(input);
+                        //console.log("the length: "+input.length);
                         for(i=0; i< input.length; i++)
                         {
                             if(input[i]=='('|| input[i]=='[' || input[i]=='{') 
                             {    
-                              if(alreadyOpened == true)
-                                {
-                                  calcArray.length = 0 ;
-                                }
-                               else 
-                               {
-                                openPar = true;
-                               }                                
+                                                              
                                 pArray.push(input[i]);
                                 currentLevel ++
                                 if(currentLevel > maxLevel)
                                   {
                                     maxLevel = currentLevel;
                                   }
-                                 balance++;
+                                balance++;
+                                if(alreadyOpened != true)
+                                {
+                                  openPar = true;
+                                //   calcArray.length = 0 ;
+                                //   console.log("clear the array");
+                                }
+                            //    else 
+                            //    {
+                            //     openPar = true;
+                            //    }
                             }
                             //---check for )
                             else if (input[i]==')')
@@ -207,21 +210,25 @@
                               if(openPar=true)
                                 {
                                   alreadyOpened = true
-                                  calcArray.push(input[i])
-                                  console.log(calcArray)
+                                  console.log("currentLevel: "+currentLevel)
+                                  console.log("maxLevel: "+maxLevel)
+                                  if (currentLevel >= maxLevel) {
+                                      calcArray.push(input[i]);
+                                      console.log("calcArray added: "+calcArray)
+                                  }                                
                                 }                               
                                 
                             }          
                         }
-                        console.log(pArray);
+                        console.log("calcArray after: "+calcArray)
                         if(balance == 0 && Unbalanced == false)
                         {
-                            console.log("Balanced Parenthesis.") ;
+                            //console.log("Balanced Parenthesis.") ;
                             result = calcArray.join("") +" - " + maxLevel + " layers deep";
                         }
                         else 
                         {
-                            console.log("Unbalanced Parenthesis.") ;
+                            //console.log("Unbalanced Parenthesis.") ;
                             result = "Unbalanced Parenthesis.";
                         }
                         
